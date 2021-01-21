@@ -12,40 +12,44 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.database.FirebaseDatabase
 import java.util.concurrent.TimeUnit
 
-class PhoneLogin : AppCompatActivity(){
+class PhoneLogin : AppCompatActivity() {
 
     lateinit var auth: FirebaseAuth
-    lateinit var storedVerificationId:String
+    lateinit var storedVerificationId: String
     lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
+
+    var numberuser = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.phone_login)
 
-        val ButtPhoneNumb = findViewById<Button>(R.id.buttonVerifyNumb)
 
-        auth=FirebaseAuth.getInstance()
+
+        auth = FirebaseAuth.getInstance()
+
+        val ButtPhoneNumb = findViewById<Button>(R.id.buttonVerifyNumb)
 
         //Перевірте поточного користувача, чи він вже ввійшов для автоматичного входу
         var currentUser = auth.currentUser
-        if(currentUser != null) {
+        if (currentUser != null) {
+            //Незабути поміняти на MainActivity
             startActivity(Intent(applicationContext, MainActivity::class.java))
             finish()
         }
-
-        ButtPhoneNumb.setOnClickListener{
+        ButtPhoneNumb.setOnClickListener {
             login()
         }
-
-        // Callback function for Phone Auth -- Функція зворотного дзвінка для авторизації телефону
+        // Функція зворотного дзвінка для авторизації телефону
         callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
             //метод onVerificationCompleted викличе, коли користувач вже підтверджений.
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-                //чомусь попадає в цю функцію, хоть код і приходить
+                //Незабути поміняти на MainActivity
                 startActivity(Intent(applicationContext, MainActivity::class.java))
                 finish()
             }
@@ -56,41 +60,47 @@ class PhoneLogin : AppCompatActivity(){
             }
 
             //onCodeSent зателефонує, коли код OTP буде успішно відправлений
-            override fun onCodeSent( verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
-                Log.d("TAG","onCodeSent:$verificationId")
+            override fun onCodeSent(
+                verificationId: String,
+                token: PhoneAuthProvider.ForceResendingToken
+            ) {
+                Log.d("TAG", "onCodeSent:$verificationId")
                 storedVerificationId = verificationId
                 resendToken = token
                 var intent = Intent(applicationContext, PhoneVerify::class.java)
                 intent.putExtra("storedVerificationId", storedVerificationId)
+                intent.putExtra("numberuser", numberuser)//передаю номер телефона
+
                 startActivity(intent)
             }
         }
 
     }
+
     //У функції login перевірте основні умови введення, ввів користувач правильний номер мобільного телефону чи ні
     private fun login() {
-        val mobileNumber=findViewById<EditText>(R.id.editTextVerifyNum)
-        var number=mobileNumber.text.toString().trim()
 
-        if(!number.isEmpty()){
-            number="+38"+number
-            sendVerificationcode (number)
-        }else{
-            Toast.makeText(this,"Enter mobile number",Toast.LENGTH_SHORT).show()
+        val mobileNumber = findViewById<EditText>(R.id.editTextVerifyNum)
+
+        var number = mobileNumber.text.toString().trim()
+
+        if (number.isNotEmpty()) {
+            number = "+38$number"
+            numberuser = number
+            sendVerificationcode(number)
+        } else {
+            Toast.makeText(this, "Enter mobile number", Toast.LENGTH_SHORT).show()
         }
-
     }
 
     private fun sendVerificationcode(number: String) {
         val options = PhoneAuthOptions.newBuilder(auth)
             .setPhoneNumber(number) // Номер телефону для підтвердження
-            .setTimeout(10L, TimeUnit.SECONDS) //Час очікування та одиниця виміру
+            .setTimeout(30L, TimeUnit.SECONDS) //Час очікування та одиниця виміру
             .setActivity(this) //Діяльність (для прив’язки зворотного дзвінка)
-            .setCallbacks(callbacks) // OnVerificationStateChangedCallbacks
+            .setCallbacks(callbacks) // визиває OnVerificationStateChangedCallbacks
             .build()
         PhoneAuthProvider.verifyPhoneNumber(options)
     }
-
-
 }
 

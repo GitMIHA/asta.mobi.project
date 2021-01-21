@@ -21,8 +21,8 @@ class Login : AppCompatActivity(){
         startActivity(phone_login)
     }
 
-    override fun onStart() {
-        super.onStart()
-
-    }
+//    override fun onStart() {
+//        super.onStart()
+//
+//    }
 }

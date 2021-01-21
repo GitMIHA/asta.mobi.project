@@ -8,9 +8,8 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="502dp"
-        android:layout_height="410dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="510dp"
+        android:layout_height="440dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,19 +20,19 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="400dp"
         android:text="ВХІД"
         android:textColor="#FFFFFF"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextVerifyNum"
         android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:inputType="phone"
         android:textColor="#FFFFFF"
@@ -45,10 +44,10 @@
     <Button
         android:id="@+id/buttonVerifyNumb"
         android:layout_width="300dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:background="@drawable/roundstyle"
-        android:text="Верифікувати 1"
+        android:text="Далі"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
