@@ -1,4 +1,4 @@
-package com.example.astamobiproject
+package com.example.astamobiproject.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,12 +7,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.astamobiproject.MainActivity
+import com.example.astamobiproject.R
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
-import com.google.firebase.database.FirebaseDatabase
 import java.util.concurrent.TimeUnit
 
 class PhoneLogin : AppCompatActivity() {
@@ -29,9 +30,7 @@ class PhoneLogin : AppCompatActivity() {
         setContentView(R.layout.phone_login)
 
 
-
         auth = FirebaseAuth.getInstance()
-
         val ButtPhoneNumb = findViewById<Button>(R.id.buttonVerifyNumb)
 
         //Перевірте поточного користувача, чи він вже ввійшов для автоматичного входу
@@ -53,12 +52,10 @@ class PhoneLogin : AppCompatActivity() {
                 startActivity(Intent(applicationContext, MainActivity::class.java))
                 finish()
             }
-
             //метод onVerificationFailed викличе, коли перевірка не вдалася
             override fun onVerificationFailed(e: FirebaseException) {
                 Toast.makeText(applicationContext, "Failed", Toast.LENGTH_LONG).show()
             }
-
             //onCodeSent зателефонує, коли код OTP буде успішно відправлений
             override fun onCodeSent(
                 verificationId: String,
@@ -76,14 +73,11 @@ class PhoneLogin : AppCompatActivity() {
         }
 
     }
-
+    // Робота з верифікацією через телефон.
     //У функції login перевірте основні умови введення, ввів користувач правильний номер мобільного телефону чи ні
     private fun login() {
-
         val mobileNumber = findViewById<EditText>(R.id.editTextVerifyNum)
-
         var number = mobileNumber.text.toString().trim()
-
         if (number.isNotEmpty()) {
             number = "+38$number"
             numberuser = number
@@ -102,5 +96,11 @@ class PhoneLogin : AppCompatActivity() {
             .build()
         PhoneAuthProvider.verifyPhoneNumber(options)
     }
+
+    // Робота з верифікацією через facebook.
+
+
+
+
 }
 

@@ -1,13 +1,13 @@
-package com.example.astamobiproject
+package com.example.astamobiproject.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.astamobiproject.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.PhoneAuthCredential
@@ -25,13 +25,11 @@ class PhoneVerify : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.phone_verify)
 
-        var numberUSEdio = intent.getStringExtra("numberuser")//достаю номер телефона
-        numberuser = numberUSEdio.toString()//вставляю в змінну  номер телефона -->(передаю в UserBIO) intent.putExtra("numberuser", numberuser) --> UserBIO
-
-
-
         val buttverify = findViewById<Button>(R.id.buttonVerifyNumb)
         val otpGiven = findViewById<EditText>(R.id.editTextVerifyNum)
+
+        var numberUSEdio = intent.getStringExtra("numberuser")//достаю номер телефона
+        numberuser = numberUSEdio.toString()//вставляю в змінну  номер телефона -->(передаю в UserBIO)
 
         auth = FirebaseAuth.getInstance()
 
@@ -59,10 +57,7 @@ class PhoneVerify : AppCompatActivity() {
                     intent.putExtra("numberuser", numberuser)
                     startActivity(intent)
                     finish()
-                    // ...
                 } else {
-                    //-- Помилка входу, відображення повідомлення та оновлення інтерфейсу користувача
-                    // --Введений код підтвердження недійсний
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         Toast.makeText(this, "Invalid OTP", Toast.LENGTH_SHORT).show()
                     }
