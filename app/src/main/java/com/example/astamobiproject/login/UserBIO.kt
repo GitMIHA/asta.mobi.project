@@ -8,9 +8,9 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.astamobiproject.NewUserDB
 import com.example.astamobiproject.R
-import com.example.astamobiproject.UserProfile
+import com.example.astamobiproject.db.NewUserDB
+import com.example.astamobiproject.fragments.HomePage
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
@@ -24,6 +24,7 @@ class UserBIO : AppCompatActivity() {
     lateinit var userName: EditText
     lateinit var userSurname: EditText
     lateinit var userCity: EditText
+    lateinit var userEmail: EditText
     lateinit var buttonToHome: Button
 
 
@@ -32,17 +33,19 @@ class UserBIO : AppCompatActivity() {
         setContentView(R.layout.user_bio)
 
         buttonToHome = findViewById(R.id.buttonToHomePage)
-        buttonToHome.setOnClickListener{onClickSaveInfo()}
-
-        userName = findViewById(R.id.editTextName)
-        userSurname = findViewById(R.id.editTextSurname)
-        userCity = findViewById(R.id.editTextCity)
+        buttonToHome.setOnClickListener { onClickSaveInfo() }
 
         userNumber = findViewById(R.id.textViewNumberPhone)
         var numberUSEdio = intent.getStringExtra("numberuser")//достаю номер телефона
         userNumber.text = numberUSEdio
 
-        database = FirebaseDatabase.getInstance().getReference(User_Kay)//група в які будуть сохранятися дані (телефон, ім'я і т.д)
+        userName = findViewById(R.id.editTextName)
+        userSurname = findViewById(R.id.editTextSurname)
+        userCity = findViewById(R.id.editTextCity)
+        userEmail = findViewById(R.id.editTextEmailAdr)
+
+        database = FirebaseDatabase.getInstance()
+            .getReference(User_Kay)//група в які будуть сохранятися дані (телефон, ім'я і т.д)
 
     }
 
@@ -52,16 +55,34 @@ class UserBIO : AppCompatActivity() {
         val name = userName.text.toString()
         val surname = userSurname.text.toString()
         val city = userCity.text.toString()
-        val email = ""
+        val email = userEmail.text.toString()
 
-        val newUser = NewUserDB(number,name,surname,city,email)
+        val bundle = Bundle()
+        bundle.putString("userNumber", number)
 
-        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(surname) && !TextUtils.isEmpty(city)) {
-            database?.push()?.setValue(newUser)
-            var intent = Intent(applicationContext, UserProfile::class.java)
-            startActivity(intent)
-        }else{
-            Toast.makeText(this, "Деяке поле пусте",Toast.LENGTH_SHORT).show()
+        val newUser = NewUserDB(number, name, surname, city, email)
+
+        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(surname) && !TextUtils.isEmpty(city) && !TextUtils.isEmpty(
+                email
+            )
+        ) {
+
+            if (!email.contains("@", true)) {
+                Toast.makeText(this, "E-mail не вірний!", Toast.LENGTH_SHORT).show()
+            } else {
+                //database?.push()?.setValue(newUser)
+                var intent = Intent(applicationContext, HomePage::class.java)
+                intent.putExtra("numberUser", number)
+                intent.putExtra("nameUser", name)
+                intent.putExtra("surnameUser", surname)
+                intent.putExtra("cityUser", city)
+                intent.putExtra("emailUser", email)
+
+                startActivity(intent)
+                Toast.makeText(this, "Ви заєрестровані успішно: $name", Toast.LENGTH_LONG).show()
+            }
+        } else {
+            Toast.makeText(this, "Деяке поле пусте", Toast.LENGTH_SHORT).show()
         }
     }
 

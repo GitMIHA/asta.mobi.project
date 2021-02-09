@@ -1,4 +1,4 @@
-package com.example.astamobiproject
+package com.example.astamobiproject.db
 
 import com.google.firebase.database.FirebaseDatabase
 

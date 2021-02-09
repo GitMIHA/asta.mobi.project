@@ -6,10 +6,9 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.astamobiproject.HomePage
-import com.example.astamobiproject.NewUserDB
+import com.example.astamobiproject.fragments.HomePage
+import com.example.astamobiproject.db.NewUserDB
 import com.example.astamobiproject.R
-import com.example.astamobiproject.UserProfile
 import com.facebook.*
 import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
@@ -60,8 +59,8 @@ class Login : AppCompatActivity() {
         login_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
             override fun onSuccess(loginResult: LoginResult?) {
                 Log.d("Success", "facebook:onSuccess:$loginResult")
-                handleFacebookAccessToken(loginResult!!.accessToken)
-//                Toast.makeText(baseContext, "Все чудово", Toast.LENGTH_SHORT).show()
+                handleFacebookAccessToken(loginResult?.accessToken)
+                Toast.makeText(baseContext, "Все чудово", Toast.LENGTH_SHORT).show()
                 //показується після Toast.makeText(this, "Ви зарегані: $nameUser", Toast.LENGTH_LONG).show()
             }
             override fun onCancel() {
@@ -92,9 +91,6 @@ class Login : AppCompatActivity() {
             signIn()
         }
 
-
-        getNumberPhone()
-
     }
 
     //////Далі все відноситься до facebook
@@ -111,18 +107,21 @@ class Login : AppCompatActivity() {
                 val cityLocation = ""
                 val email = result.user?.email
 
-                val newUser = NewUserDB(
-                    numberUser.toString(),
-                    nameUser,
-                    lastNameUser,
-                    cityLocation,
-                    email.toString()
-                )
-                database?.push()?.setValue(newUser)
-
-                var intent = Intent(applicationContext, HomePage::class.java)
+                if(numberUser == null || numberUser == ""){
+                var intent = Intent(applicationContext, PhoneLogin::class.java)
                 startActivity(intent)
-                Toast.makeText(this, "Ви спішно зареєстровані: $nameUser", Toast.LENGTH_LONG).show()
+                }
+//                val newUser = NewUserDB(
+//                    numberUser.toString(),
+//                    nameUser,
+//                    lastNameUser,
+//                    cityLocation,
+//                    email.toString()
+//                )
+//              database?.push()?.setValue(newUser)
+//                var intent = Intent(applicationContext, HomePage::class.java)
+//                startActivity(intent)
+//                Toast.makeText(this, "Ви спішно зареєстровані: $nameUser", Toast.LENGTH_LONG).show()
 
             }.addOnFailureListener { e ->
                 Toast.makeText(baseContext, e.message, Toast.LENGTH_LONG).show()
@@ -152,8 +151,9 @@ class Login : AppCompatActivity() {
                         val personGivenName = acct.givenName
                         val personFamilyName = acct.familyName
                         val personEmail = acct.email
-//                        val personId = acct.id
-//                        val personPhoto: Uri? = acct.photoUrl
+
+//                      val personId = acct.id
+//                      val personPhoto: Uri? = acct.photoUrl
 
 //                        val newUser = NewUserDB(numberUser.toString(),
 //                            personGivenName.toString(),
@@ -162,20 +162,8 @@ class Login : AppCompatActivity() {
 //                            personEmail.toString())
 //                        database?.push()?.setValue(newUser)
 
-////                        val mPhoneNumber =mAppContext.getSystemService(Context.TELEPHONY_SERVICE).line1Number
-//
-////                        val subscription = SubscriptionManager.from(context).activeSubscriptionInfoList
-////                        for (subscriptionInfo in subscription) {
-////                            val number = subscriptionInfo.number
-////                            Log.e("Test", " Number is " + number) }
-//                        val tm = getSystemService(Context.TELEPHONY_SERVICE)
-//                        //---get the SIM card ID---
-//                         val simID = tm.simSerialNumber
-//                         if (simID != null)
-//                         Toast.makeText(this, "SIM card ID: " + simID, Toast.LENGTH_LONG).show()
-
                     }
-                    var intent = Intent(applicationContext, HomePage::class.java)
+                    val intent = Intent(applicationContext, HomePage::class.java)
                     startActivity(intent)
                 } else {
                     Log.w("TAG", "signInWithCredential:failure", task.exception)
@@ -222,13 +210,6 @@ class Login : AppCompatActivity() {
         val phone_login = Intent(this, PhoneLogin::class.java)
         startActivity(phone_login)
     }
-
-
-    fun getNumberPhone() {
-
-    }
-
-
 
 
 }

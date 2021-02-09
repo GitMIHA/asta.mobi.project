@@ -3,18 +3,18 @@
 
     <item
         android:id="@+id/fragmentHome"
-        android:title="home"
-        android:icon="@drawable/ic_home"/>
+        android:title="Home"
+        android:icon="@drawable/healthdata"/>
     <item android:id="@+id/fragmentMyAds"
-        android:title="my ads"
-        android:icon="@drawable/ic_my_ads"/>
+        android:title="My ads"
+        android:icon="@drawable/vector4"/>
     <item android:id="@+id/fragmentCreateAds"
-        android:title="add"
+        android:title="Add"
         android:icon="@drawable/ic_add"/>
     <item android:id="@+id/fragmentFavorite"
-        android:title="favorite"
+        android:title="Favorite"
         android:icon="@drawable/ic_baseline_favorite_24"/>
     <item android:id="@+id/fragmentProfile"
-        android:title="profile"
-        android:icon="@drawable/ic_profile"/>
+        android:title="Profile"
+        android:icon="@drawable/ic_settings"/>
 </menu>

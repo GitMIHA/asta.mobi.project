@@ -54,12 +54,12 @@ class PhoneVerify : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     var intent = Intent(applicationContext, UserBIO::class.java)
-                    intent.putExtra("numberuser", numberuser)
+                    intent.putExtra("numberuser", numberuser) //  Дані яку будемо передавати в інше актівіті
                     startActivity(intent)
                     finish()
                 } else {
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                        Toast.makeText(this, "Invalid OTP", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Не вірний код!", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

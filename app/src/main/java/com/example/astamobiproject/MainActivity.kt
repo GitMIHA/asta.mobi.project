@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.astamobiproject.fragments.HomePage
 import com.example.astamobiproject.login.Login
 import com.google.firebase.auth.FirebaseAuth
 
@@ -24,18 +25,18 @@ public class MainActivity : AppCompatActivity() {
 
         /** Якщо користувача не автентифіковано, надішліть його до SignInActivity, щоб спершу здійснити автентифікацію.
         * В іншому випадку надішліть його на DashboardActivity */
-        Handler().postDelayed({
-            if(user != null){
-                val dashboardIntent = Intent(this, HomePage::class.java)
-                startActivity(dashboardIntent)
-                finish()
-            }else{
-                //Login має буть
-                val signInIntent = Intent(this, Login::class.java)
-                startActivity(signInIntent)
-                finish()
-            }
-        }, 100)
+//        Handler().postDelayed({
+//            if(user != null){
+//                val dashboardIntent = Intent(this, HomePage::class.java)
+//                startActivity(dashboardIntent)
+//                finish()
+//            }else{
+//                //Login має буть
+//                val signInIntent = Intent(this, Login::class.java)
+//                startActivity(signInIntent)
+//                finish()
+//            }
+//        }, 30)
 
     }
 

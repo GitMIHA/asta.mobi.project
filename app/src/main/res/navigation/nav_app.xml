@@ -7,27 +7,27 @@
 
     <fragment
         android:id="@+id/fragmentHome"
-        android:name="com.example.astamobiproject.FragmentHome"
+        android:name="com.example.astamobiproject.fragments.FragmentHome"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/fragmentMyAds"
-        android:name="com.example.astamobiproject.FragmentMyAds"
+        android:name="com.example.astamobiproject.fragments.FragmentMyAds"
         android:label="fragment_my_ads"
         tools:layout="@layout/fragment_my_ads" />
     <fragment
         android:id="@+id/fragmentCreateAds"
-        android:name="com.example.astamobiproject.FragmentCreateAds"
+        android:name="com.example.astamobiproject.fragments.FragmentCreateAds"
         android:label="fragment_create_ads"
         tools:layout="@layout/fragment_create_ads" />
     <fragment
         android:id="@+id/fragmentFavorite"
-        android:name="com.example.astamobiproject.FragmentFavorite"
+        android:name="com.example.astamobiproject.fragments.FragmentFavorite"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
     <fragment
         android:id="@+id/fragmentProfile"
-        android:name="com.example.astamobiproject.FragmentProfile"
+        android:name="com.example.astamobiproject.fragments.FragmentProfile"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

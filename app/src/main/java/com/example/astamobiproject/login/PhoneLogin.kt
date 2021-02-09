@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.astamobiproject.MainActivity
 import com.example.astamobiproject.R
+import com.example.astamobiproject.fragments.HomePage
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
@@ -37,7 +38,7 @@ class PhoneLogin : AppCompatActivity() {
         var currentUser = auth.currentUser
         if (currentUser != null) {
             //Незабути поміняти на MainActivity
-            startActivity(Intent(applicationContext, MainActivity::class.java))
+            startActivity(Intent(applicationContext, HomePage::class.java))
             finish()
         }
         ButtPhoneNumb.setOnClickListener {
@@ -90,7 +91,7 @@ class PhoneLogin : AppCompatActivity() {
     private fun sendVerificationcode(number: String) {
         val options = PhoneAuthOptions.newBuilder(auth)
             .setPhoneNumber(number) // Номер телефону для підтвердження
-            .setTimeout(30L, TimeUnit.SECONDS) //Час очікування та одиниця виміру
+            .setTimeout(20L, TimeUnit.SECONDS) //Час очікування та одиниця виміру
             .setActivity(this) //Діяльність (для прив’язки зворотного дзвінка)
             .setCallbacks(callbacks) // визиває OnVerificationStateChangedCallbacks
             .build()
