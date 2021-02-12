@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "505287829656",
+    "project_id": "asta-mobi-project",
+    "storage_bucket": "asta-mobi-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:505287829656:android:db322da52c0f9cfc8988ed",
+        "android_client_info": {
+          "package_name": "com.example.astamobiproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "505287829656-l89o6hreir8obvpa2dirb036guml1p48.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAohxDONkEJctUzWKRpjZOHkDSC16M1tmg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "505287829656-l89o6hreir8obvpa2dirb036guml1p48.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

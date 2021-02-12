@@ -6,21 +6,47 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.AdapterListUpdateCallback
 import androidx.recyclerview.widget.RecyclerView
 import com.example.astamobiproject.R
 
-class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class RecyclerViewAdapter() : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+//var callback: (List<String>) -> Unit
 
+    //для приклада поки
+    var imageArray = arrayOf(
+        R.drawable.pumaalter,
+        R.drawable.pumaalter,
+        R.drawable.appicon,
+        R.drawable.pumaalter,
+        R.drawable.appicon,
+        R.drawable.pumaalter,
+        R.drawable.appicon
 
-    var imageArray = arrayOf(R.drawable.appicon,R.drawable.appicon)
-
-    private var modelArray = arrayOf("nike air jordan", "nike air max")
-    private var priceArray = arrayOf("999", "444")
-    private var ueArray = arrayOf("40", "43")
-    private var lengthArray = arrayOf("29", "30")
-    private var widthArray = arrayOf("23", "24")
-    private var materialArray = arrayOf("Хлопок, текстиль", "Ткань, резина, піна")
-
+    )
+    private var modelArray = arrayOf(
+        "puma alteration PN-1",
+        "puma alteration PN-1",
+        "puma alteration PN-1",
+        "puma alteration PN-1",
+        "puma alteration PN-1",
+        "puma alteration PN-1",
+        "puma alteration PN-1"
+    )
+    private var priceArray = arrayOf("999$", "239$", "319$", "939$", "11$", "939$", "999$")
+    private var ueArray = arrayOf("42", "43", "42", "41", "39", "41", "40")
+    private var lengthArray = arrayOf("29", "37", "31", "32", "29", "26", "49")
+    private var widthArray = arrayOf("23", "24", "26", "21", "21", "20", "22")
+    private var materialArray =
+        arrayOf(
+            "Хлопок",
+            "Хлопок, буст",
+            "Хлопок, шкіра",
+            "Шкіра",
+            "Хлопок, шкіра",
+            "Хлопок",
+            "Хлопок"
+        )
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -31,7 +57,7 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
     }
 
     override fun getItemCount(): Int {
-        return  priceArray.size
+        return priceArray.size
     }
 
     override fun onBindViewHolder(holder: RecyclerViewAdapter.ViewHolder, position: Int) {
@@ -42,14 +68,11 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
         holder.modelLength!!.text = lengthArray[position]
         holder.modelWidth!!.text = widthArray[position]
         holder.modelMaterial!!.text = materialArray[position]
-
-
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var modelImageOne: ImageView? = null
-
         var model: TextView? = null
         var modelPrice: TextView? = null
         var modelUE: TextView? = null
@@ -58,16 +81,14 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
         var modelMaterial: TextView? = null
 
         init {
-            modelImageOne = itemView.findViewById(R.id.imageViewforModel)
+            modelImageOne = itemView.findViewById(R.id.imageViewForModel)
             model = itemView.findViewById(R.id.textViewModelName)
             modelPrice = itemView.findViewById(R.id.textViewModelPrice)
             modelUE = itemView.findViewById(R.id.textViewForEU)
             modelLength = itemView.findViewById(R.id.textViewForLength)
             modelWidth = itemView.findViewById(R.id.textViewForWidth)
             modelMaterial = itemView.findViewById(R.id.textViewForMaterial)
-
         }
-
 
 
     }
