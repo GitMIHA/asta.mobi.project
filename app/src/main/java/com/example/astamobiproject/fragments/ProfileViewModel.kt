@@ -18,7 +18,7 @@ class ProfileViewModel: ViewModel() {
     var userEmail: String? = null
 
     fun saveInfoUser(){
-
+//        val numberUser = activity.intent.getStringExtra("numberUser").toString()
     }
     fun getuserNumber(): String? {
         return userNumber
@@ -26,10 +26,5 @@ class ProfileViewModel: ViewModel() {
     fun setuserNumber(userNumber: String) {
         this.userNumber = userNumber
     }
-
-
-
-
-
 
 }

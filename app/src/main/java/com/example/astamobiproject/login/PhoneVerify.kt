@@ -43,7 +43,7 @@ class PhoneVerify : AppCompatActivity() {
                 )
                 signInWithPhoneAuthCredential(credential)
             } else {
-                Toast.makeText(this, "Enter OTP", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Код верифікації введено невірно", Toast.LENGTH_LONG).show()
             }
         }
 

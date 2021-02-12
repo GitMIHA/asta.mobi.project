@@ -55,7 +55,7 @@ class PhoneLogin : AppCompatActivity() {
             }
             //метод onVerificationFailed викличе, коли перевірка не вдалася
             override fun onVerificationFailed(e: FirebaseException) {
-                Toast.makeText(applicationContext, "Failed", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, "Номер введено невірно", Toast.LENGTH_LONG).show()
             }
             //onCodeSent зателефонує, коли код OTP буде успішно відправлений
             override fun onCodeSent(

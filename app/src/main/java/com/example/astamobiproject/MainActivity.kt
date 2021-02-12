@@ -23,20 +23,22 @@ public class MainActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
         val user = mAuth.currentUser
 
+
         /** Якщо користувача не автентифіковано, надішліть його до SignInActivity, щоб спершу здійснити автентифікацію.
         * В іншому випадку надішліть його на DashboardActivity */
-//        Handler().postDelayed({
-//            if(user != null){
-//                val dashboardIntent = Intent(this, HomePage::class.java)
-//                startActivity(dashboardIntent)
-//                finish()
-//            }else{
-//                //Login має буть
-//                val signInIntent = Intent(this, Login::class.java)
-//                startActivity(signInIntent)
-//                finish()
-//            }
-//        }, 30)
+        Handler().postDelayed({
+            if(user != null){
+                val dashboardIntent = Intent(this, HomePage::class.java)
+                startActivity(dashboardIntent)
+                finish()
+            }else{
+                //Login має буть
+                val signInIntent = Intent(this, Login::class.java)
+                startActivity(signInIntent)
+                finish()
+            }
+        }, 10)
+
 
     }
 

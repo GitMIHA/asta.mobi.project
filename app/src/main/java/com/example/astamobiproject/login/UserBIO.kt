@@ -28,6 +28,8 @@ class UserBIO : AppCompatActivity() {
     lateinit var buttonToHome: Button
 
 
+    private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.user_bio)
@@ -66,11 +68,9 @@ class UserBIO : AppCompatActivity() {
                 email
             )
         ) {
-
-            if (!email.contains("@", true)) {
-                Toast.makeText(this, "E-mail не вірний!", Toast.LENGTH_SHORT).show()
-            } else {
-                //database?.push()?.setValue(newUser)
+//            if (!email.contains("@", true)) {
+            if (email.matches(emailPattern.toRegex())) {
+//              database?.push()?.setValue(newUser)
                 var intent = Intent(applicationContext, HomePage::class.java)
                 intent.putExtra("numberUser", number)
                 intent.putExtra("nameUser", name)
@@ -80,6 +80,9 @@ class UserBIO : AppCompatActivity() {
 
                 startActivity(intent)
                 Toast.makeText(this, "Ви заєрестровані успішно: $name", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "E-mail не вірний!", Toast.LENGTH_SHORT).show()
+
             }
         } else {
             Toast.makeText(this, "Деяке поле пусте", Toast.LENGTH_SHORT).show()
