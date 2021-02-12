@@ -70,7 +70,7 @@ class UserBIO : AppCompatActivity() {
         ) {
 //            if (!email.contains("@", true)) {
             if (email.matches(emailPattern.toRegex())) {
-//              database?.push()?.setValue(newUser)
+              database?.push()?.setValue(newUser)
                 var intent = Intent(applicationContext, HomePage::class.java)
                 intent.putExtra("numberUser", number)
                 intent.putExtra("nameUser", name)
