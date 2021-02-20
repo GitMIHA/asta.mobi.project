@@ -84,5 +84,4 @@ dependencies {
     implementation 'nl.joery.animatedbottombar:library:1.0.9'
 
 
-
 }

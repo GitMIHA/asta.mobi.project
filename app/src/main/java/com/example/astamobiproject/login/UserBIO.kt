@@ -1,6 +1,8 @@
 package com.example.astamobiproject.login
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
@@ -27,6 +29,7 @@ class UserBIO : AppCompatActivity() {
     lateinit var userEmail: EditText
     lateinit var buttonToHome: Button
 
+    lateinit var sPref: SharedPreferences
 
     private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
@@ -64,9 +67,7 @@ class UserBIO : AppCompatActivity() {
 
         val newUser = NewUserDB(number, name, surname, city, email)
 
-        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(surname) && !TextUtils.isEmpty(city) && !TextUtils.isEmpty(
-                email
-            )
+        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(surname) && !TextUtils.isEmpty(city) && !TextUtils.isEmpty(email)
         ) {
 //            if (!email.contains("@", true)) {
             if (email.matches(emailPattern.toRegex())) {
@@ -77,6 +78,16 @@ class UserBIO : AppCompatActivity() {
                 intent.putExtra("surnameUser", surname)
                 intent.putExtra("cityUser", city)
                 intent.putExtra("emailUser", email)
+
+                sPref = getPreferences(Context.MODE_PRIVATE)
+                val editor = sPref.edit()
+
+                editor.putString("numberUser", number)
+                editor.putString("nameUser", name)
+                editor.putString("surnameUser", surname)
+                editor.putString("cityUser", city)
+                editor.putString("emailUser", email)
+                editor.apply()
 
                 startActivity(intent)
                 Toast.makeText(this, "Ви заєрестровані успішно: $name", Toast.LENGTH_LONG).show()

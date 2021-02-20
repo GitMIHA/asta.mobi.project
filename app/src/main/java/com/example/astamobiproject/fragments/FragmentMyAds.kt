@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.astamobiproject.R
-import com.facebook.FacebookSdk.getApplicationContext
+import com.example.astamobiproject.fragments.adapters.RecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_my_ads.*
-import kotlin.jvm.java as java
 
 class FragmentMyAds : Fragment() {
 
@@ -36,7 +35,8 @@ class FragmentMyAds : Fragment() {
         layoutManager = LinearLayoutManager(activity)
         recyclerViewMyAds.layoutManager = layoutManager
 
-        adapter = RecyclerViewAdapter()
+        adapter =
+            RecyclerViewAdapter()
         recyclerViewMyAds.adapter = adapter
 
     }

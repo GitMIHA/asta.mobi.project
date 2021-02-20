@@ -8,7 +8,7 @@
     tools:context=".fragments.FragmentCreateAds">
 
     <Button
-        android:id="@+id/buttoncomeback_1"
+        android:id="@+id/buttonComeback_to_home"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginStart="25dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonSaveItem"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
@@ -31,6 +31,7 @@
         android:textColor="#0CCDE6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/textView8"
@@ -42,48 +43,54 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttoncomeback_1" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonComeback_to_home" />
 
-    <ImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/imageViewForPhoto_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="10dp"
+        app:riv_corner_radius="15dp"
         android:isScrollContainer="false"
         android:src="@android:drawable/sym_def_app_icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-    <ImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/imageViewForPhoto_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
         android:src="@android:drawable/sym_def_app_icon"
         app:layout_constraintStart_toEndOf="@+id/imageViewForPhoto_1"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:riv_corner_radius="15dp" />
 
-    <ImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/imageViewForPhoto_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
         android:src="@android:drawable/sym_def_app_icon"
-        app:layout_constraintEnd_toStartOf="@+id/imageViewForPhoto_4"
         app:layout_constraintStart_toEndOf="@+id/imageViewForPhoto_2"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:riv_corner_radius="15dp" />
 
-    <ImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/imageViewForPhoto_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="25dp"
         android:src="@android:drawable/sym_def_app_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintStart_toEndOf="@+id/imageViewForPhoto_3"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:riv_corner_radius="15dp" />
 
     <TextView
         android:id="@+id/textView9"
@@ -147,7 +154,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
         android:ems="10"
-        android:hint="44"
+        android:hint="- 44"
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
@@ -160,7 +167,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
         android:ems="10"
-        android:hint="39"
+        android:hint="- 39"
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
@@ -173,7 +180,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
         android:ems="10"
-        android:hint="54"
+        android:hint="- 54"
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
