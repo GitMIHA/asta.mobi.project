@@ -1,47 +1,39 @@
 package com.example.astamobiproject.fragments
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import com.bumptech.glide.Glide
 import com.example.astamobiproject.R
-import com.example.astamobiproject.db.NewUserDB
+import com.example.astamobiproject.db.ItemDatabase
+import com.example.astamobiproject.login.Login
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_create_ads.*
-import kotlinx.android.synthetic.main.fragment_profile.*
 
 
 class FragmentCreateAds : Fragment() {
 
-    var User_Kay = "MY_ITEMS"
+    var ITEMS_KAY = "MY_ITEMS"
     var database: DatabaseReference? = null
-
 
     var sPref: SharedPreferences? = null
 
     var imageUri: Uri? = null
-
-    var itemBitmap: Bitmap? = null
-
-    var itemEUSize: String? = null
-    var itemLength: String? = null
-    var itemWidth: String? = null
-
-    var itemModel: String? = null
-    var itemMaterial: String? = null
-    var itemDescription: String? = null
-    var itemPrice: String? = null
+    var imageUri_1: Uri? = null
+    var imageUri_2: Uri? = null
+    var imageUri_3: Uri? = null
+    var imageUri_4: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,13 +51,17 @@ class FragmentCreateAds : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        buttonComeback_to_home.setOnClickListener{
+        database = FirebaseDatabase.getInstance().getReference(ITEMS_KAY)
+
+        buttonComeback_to_home.setOnClickListener {
 
         }
 
-        buttonSaveItem.setOnClickListener{}
+        buttonSaveItem.setOnClickListener {
+            addItemToDB()
+        }
 
-        imageViewForPhoto_1.setOnClickListener{
+        imageViewForPhoto_1.setOnClickListener {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             startActivityForResult(gallery, 100)
         }
@@ -74,18 +70,47 @@ class FragmentCreateAds : Fragment() {
 //        database?.push()?.setValue(newUser)
 
     }
-    fun workDB(){
-        database = FirebaseDatabase.getInstance().getReference(User_Kay)
+
+    fun addItemToDB() {
+
+        val uriImage = imageUri.toString()
+        val euSize = editItemEUsize.text.toString()
+        val itemLength = editItemLength.text.toString()
+        val itemWidth = editItemWidth.text.toString()
+        val itemModel = editItemModel.text.toString()
+        val itemMaterial = editItemMaterial.text.toString()
+        val itemDescription = editItemDescription.text.toString()
+        val itemPrice = editIremPrice.text.toString()
+
+
+        if(!TextUtils.isEmpty(uriImage) && !TextUtils.isEmpty(euSize) &&
+            !TextUtils.isEmpty(itemLength) && !TextUtils.isEmpty(itemWidth) &&
+            !TextUtils.isEmpty(itemModel) && !TextUtils.isEmpty(itemMaterial) &&
+            !TextUtils.isEmpty(itemDescription) && !TextUtils.isEmpty(itemPrice))
+        {
+            val addOrder = ItemDatabase(uriImage, euSize, itemLength, itemWidth, itemModel, itemMaterial, itemDescription, itemPrice)
+            database?.push()?.setValue(addOrder)
+            val intent = Intent(activity, HomePage::class.java)
+            startActivity(intent)
+            Toast.makeText(activity, "Успішно збережено", Toast.LENGTH_SHORT).show()
+        }
+        else{
+            Toast.makeText(activity, "Деяке поле пусте", Toast.LENGTH_SHORT).show()
+        }
+
+
+
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == 100) {
             imageUri = data?.data
-//            sPref = activity?.getPreferences(Context.MODE_PRIVATE)
+//           sPref = activity?.getPreferences(Context.MODE_PRIVATE)
 //            val editor = sPref?.edit()
 //            editor?.putString("imageProfileUri", imageUri.toString())
-//            editor?.apply()
-//            Glide.with(this).load(sPref?.getString("imageProfileUri","")).into(imageViewForPhoto_1)
+//           editor?.apply()
+//           Glide.with(this).load(sPref?.getString("imageProfileUri","")).into(imageViewForPhoto_1)
             imageViewForPhoto_1.setImageURI(imageUri)
         }
 

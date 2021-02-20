@@ -13,36 +13,17 @@ class RecyclerViewAdapter() : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolde
 
     //для приклада поки
     var imageArray = arrayOf(
-        R.drawable.pumaalter,
-        R.drawable.pumaalter,
-        R.drawable.appicon,
-        R.drawable.pumaalter,
-        R.drawable.appicon,
-        R.drawable.pumaalter,
-        R.drawable.appicon
-
+        R.drawable.pumaalter
     )
     private var modelArray = arrayOf(
-        "puma alteration PN-1",
-        "puma alteration PN-1",
-        "puma alteration PN-1",
-        "puma alteration PN-1",
-        "puma alteration PN-1",
-        "puma alteration PN-1",
         "puma alteration PN-1"
     )
-    private var priceArray = arrayOf("999$", "239$", "319$", "939$", "11$", "939$", "999$")
-    private var ueArray = arrayOf("42", "43", "42", "41", "39", "41", "40")
-    private var lengthArray = arrayOf("29", "37", "31", "32", "29", "26", "49")
-    private var widthArray = arrayOf("23", "24", "26", "21", "21", "20", "22")
+    private var priceArray = arrayOf("999$")
+    private var ueArray = arrayOf("42")
+    private var lengthArray = arrayOf("29")
+    private var widthArray = arrayOf("23")
     private var materialArray =
         arrayOf(
-            "Хлопок",
-            "Хлопок, буст",
-            "Хлопок, шкіра",
-            "Шкіра",
-            "Хлопок, шкіра",
-            "Хлопок",
             "Хлопок"
         )
 

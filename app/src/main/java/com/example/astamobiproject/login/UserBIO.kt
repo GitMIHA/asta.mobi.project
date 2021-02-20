@@ -55,6 +55,7 @@ class UserBIO : AppCompatActivity() {
     }
 
     private fun onClickSaveInfo() {
+
         val number = userNumber.text.toString()
 //      val idUser = database?.key?:""
         val name = userName.text.toString()
@@ -62,8 +63,8 @@ class UserBIO : AppCompatActivity() {
         val city = userCity.text.toString()
         val email = userEmail.text.toString()
 
-        val bundle = Bundle()
-        bundle.putString("userNumber", number)
+//        val bundle = Bundle()
+//        bundle.putString("userNumber", number)
 
         val newUser = NewUserDB(number, name, surname, city, email)
 
@@ -71,7 +72,9 @@ class UserBIO : AppCompatActivity() {
         ) {
 //            if (!email.contains("@", true)) {
             if (email.matches(emailPattern.toRegex())) {
-              database?.push()?.setValue(newUser)
+
+//              database?.push()?.setValue(newUser)
+
                 var intent = Intent(applicationContext, HomePage::class.java)
                 intent.putExtra("numberUser", number)
                 intent.putExtra("nameUser", name)
@@ -79,15 +82,14 @@ class UserBIO : AppCompatActivity() {
                 intent.putExtra("cityUser", city)
                 intent.putExtra("emailUser", email)
 
-                sPref = getPreferences(Context.MODE_PRIVATE)
-                val editor = sPref.edit()
-
-                editor.putString("numberUser", number)
-                editor.putString("nameUser", name)
-                editor.putString("surnameUser", surname)
-                editor.putString("cityUser", city)
-                editor.putString("emailUser", email)
-                editor.apply()
+//                sPref = getPreferences(Context.MODE_PRIVATE)
+//                val editor = sPref.edit()
+//                editor.putString("numberUserF", number)
+//                editor.putString("nameUserF", name)
+//                editor.putString("surnameUserF", surname)
+//                editor.putString("cityUserF", city)
+//                editor.putString("emailUserF", email)
+//                editor.apply()
 
                 startActivity(intent)
                 Toast.makeText(this, "Ви заєрестровані успішно: $name", Toast.LENGTH_LONG).show()
@@ -99,6 +101,7 @@ class UserBIO : AppCompatActivity() {
             Toast.makeText(this, "Деяке поле пусте", Toast.LENGTH_SHORT).show()
         }
     }
+
 
 
 }

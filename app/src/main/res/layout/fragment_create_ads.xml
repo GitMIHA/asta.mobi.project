@@ -148,7 +148,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/editItemEUsize"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -162,7 +162,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageView10" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/editItemLength"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
@@ -172,10 +172,10 @@
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintTop_toBottomOf="@+id/editItemEUsize" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName4"
+        android:id="@+id/editItemWidth"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
@@ -185,7 +185,7 @@
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+        app:layout_constraintTop_toBottomOf="@+id/editItemLength" />
 
     <TextView
         android:id="@+id/textView15"
@@ -208,7 +208,7 @@
         android:textColor="#FFFFFF"
 
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5" />
+        app:layout_constraintTop_toBottomOf="@+id/editItemModel" />
 
     <TextView
         android:id="@+id/textView17"
@@ -220,7 +220,7 @@
         android:textColor="#FFFFFF"
 
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName6" />
+        app:layout_constraintTop_toBottomOf="@+id/editItemMaterial" />
 
     <TextView
         android:id="@+id/textView18"
@@ -232,10 +232,10 @@
         android:textColor="#FFFFFF"
 
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />
+        app:layout_constraintTop_toBottomOf="@+id/editItemDescription" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName5"
+        android:id="@+id/editItemModel"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -248,7 +248,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName6"
+        android:id="@+id/editItemMaterial"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -261,7 +261,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName7"
+        android:id="@+id/editItemDescription"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -274,7 +274,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName8"
+        android:id="@+id/editIremPrice"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"

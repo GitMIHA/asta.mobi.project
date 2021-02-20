@@ -1,10 +1,11 @@
 package com.example.astamobiproject.db
 
 import android.graphics.Bitmap
+import android.net.Uri
 
 class ItemDatabase() {
 
-    var itemFirstBitmap: Bitmap? = null
+    var itemFirstBitmap: String? = null
     var itemSecondBitmap: Bitmap? = null
     var itemThirdBitmap: Bitmap? = null
     var itemFourthBitmap: Bitmap? = null
@@ -19,7 +20,7 @@ class ItemDatabase() {
     var itemPrice: String? = null
 
     constructor(
-        firstBitmap: Bitmap,
+        firstBitmap: String,
 
         euSize: String,
         length: String,

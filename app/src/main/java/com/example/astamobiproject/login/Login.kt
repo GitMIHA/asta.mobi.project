@@ -209,7 +209,7 @@ class Login : AppCompatActivity() {
                 }
             })
         val parameters = Bundle()
-        parameters.putString("fields", "first_name, last_name, email, city")
+        parameters.putString("fields", "first_name, last_name, email")
         graphRequest.parameters = parameters
         graphRequest.executeAsync()
 

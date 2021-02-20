@@ -30,7 +30,6 @@ class PhoneLogin : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.phone_login)
 
-
         auth = FirebaseAuth.getInstance()
         val ButtPhoneNumb = findViewById<Button>(R.id.buttonVerifyNumb)
 
@@ -44,20 +43,15 @@ class PhoneLogin : AppCompatActivity() {
         ButtPhoneNumb.setOnClickListener {
             login()
         }
-        // Функція зворотного дзвінка для авторизації телефону
         callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-
-            //метод onVerificationCompleted викличе, коли користувач вже підтверджений.
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                 //Незабути поміняти на MainActivity
                 startActivity(Intent(applicationContext, MainActivity::class.java))
                 finish()
             }
-            //метод onVerificationFailed викличе, коли перевірка не вдалася
             override fun onVerificationFailed(e: FirebaseException) {
                 Toast.makeText(applicationContext, "Номер введено невірно", Toast.LENGTH_LONG).show()
             }
-            //onCodeSent зателефонує, коли код OTP буде успішно відправлений
             override fun onCodeSent(
                 verificationId: String,
                 token: PhoneAuthProvider.ForceResendingToken
@@ -74,8 +68,7 @@ class PhoneLogin : AppCompatActivity() {
         }
 
     }
-    // Робота з верифікацією через телефон.
-    //У функції login перевірте основні умови введення, ввів користувач правильний номер мобільного телефону чи ні
+
     private fun login() {
         val mobileNumber = findViewById<EditText>(R.id.editTextVerifyNum)
         var number = mobileNumber.text.toString().trim()
@@ -97,11 +90,6 @@ class PhoneLogin : AppCompatActivity() {
             .build()
         PhoneAuthProvider.verifyPhoneNumber(options)
     }
-
-    // Робота з верифікацією через facebook.
-
-
-
 
 }
 
