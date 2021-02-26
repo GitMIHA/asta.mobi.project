@@ -1,6 +1,5 @@
 package com.example.astamobiproject.login
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -11,7 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.astamobiproject.R
-import com.example.astamobiproject.db.NewUserDB
+import com.example.astamobiproject.db.BaseUserDB
 import com.example.astamobiproject.fragments.HomePage
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -66,7 +65,7 @@ class UserBIO : AppCompatActivity() {
 //        val bundle = Bundle()
 //        bundle.putString("userNumber", number)
 
-        val newUser = NewUserDB(number, name, surname, city, email)
+        val newUser = BaseUserDB(number, name, surname, city, email)
 
         if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(surname) && !TextUtils.isEmpty(city) && !TextUtils.isEmpty(email)
         ) {

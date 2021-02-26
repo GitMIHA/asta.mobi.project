@@ -7,11 +7,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.astamobiproject.R
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 
 
-class RecyclerViewAdapterHome: RecyclerView.Adapter<RecyclerViewAdapterHome.ViewHolder>() {
+class RVAdapterHome: RecyclerView.Adapter<RVAdapterHome.ViewHolder>() {
 
     var imageArray = arrayOf(R.drawable.appicon)
     private var modelArray = arrayOf("puma alteration PN-1")
@@ -25,7 +23,7 @@ class RecyclerViewAdapterHome: RecyclerView.Adapter<RecyclerViewAdapterHome.View
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): RecyclerViewAdapterHome.ViewHolder {
+    ): RVAdapterHome.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.card_for_home, parent, false)
         return ViewHolder(v)
     }
@@ -34,7 +32,7 @@ class RecyclerViewAdapterHome: RecyclerView.Adapter<RecyclerViewAdapterHome.View
         return priceArray.size
     }
 
-    override fun onBindViewHolder(holder: RecyclerViewAdapterHome.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RVAdapterHome.ViewHolder, position: Int) {
         holder.modelImageOne!!.setImageResource(imageArray[position])
         holder.model!!.text = modelArray[position]
         holder.modelPrice!!.text = priceArray[position]

@@ -124,13 +124,12 @@ class Login : AppCompatActivity() {
 
 //                val newUser = NewUserDB(numberUser.toString(), nameUser,lastNameUser, cityLocation,email.toString())
 //                database?.push()?.setValue(newUser)
-
                 Toast.makeText(this, "Ви упішно зареєстровані: $name", Toast.LENGTH_LONG).show()
 
                 startActivity(intent)
 
             }.addOnFailureListener { e ->
-                Toast.makeText(baseContext, e.message, Toast.LENGTH_LONG).show()
+//                Toast.makeText(baseContext, e.message, Toast.LENGTH_LONG).show()
                 val intent = Intent(applicationContext, HomePage::class.java)
                 startActivity(intent)
                 Log.e("ERROR_EDMT", e.message!!)

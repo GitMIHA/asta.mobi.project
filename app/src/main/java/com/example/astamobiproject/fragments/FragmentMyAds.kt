@@ -1,25 +1,32 @@
 package com.example.astamobiproject.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.astamobiproject.R
-import com.example.astamobiproject.fragments.adapters.RecyclerViewAdapter
+import com.example.astamobiproject.db.BaseItemDB
+import com.example.astamobiproject.fragments.adapters.RVAdapterMyAds
+import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.card_row.view.*
+import kotlinx.android.synthetic.main.fragment_create_ads.view.*
 import kotlinx.android.synthetic.main.fragment_my_ads.*
+
 
 class FragmentMyAds : Fragment() {
 
-    private  var layoutManager: RecyclerView.LayoutManager? = null
-    private  var adapter: RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>? = null
+    private lateinit var layoutManager: RecyclerView.LayoutManager
+    private lateinit var adapterMyAds: RecyclerView.Adapter<RVAdapterMyAds.ViewHolder>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    lateinit var mRecyclerView: RecyclerView
+    lateinit var mDatabase: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,11 +42,19 @@ class FragmentMyAds : Fragment() {
         layoutManager = LinearLayoutManager(activity)
         recyclerViewMyAds.layoutManager = layoutManager
 
-        adapter =
-            RecyclerViewAdapter()
-        recyclerViewMyAds.adapter = adapter
+        val options: FirebaseRecyclerOptions<BaseItemDB> = FirebaseRecyclerOptions.Builder<BaseItemDB>()
+                .setQuery(FirebaseDatabase.getInstance().reference.child("MY_ITEMS"),
+                    BaseItemDB::class.java)
+                .build()
+
+        adapterMyAds = RVAdapterMyAds(options)
+        recyclerViewMyAds!!.adapter = adapterMyAds
 
     }
 
-
 }
+
+
+
+
+

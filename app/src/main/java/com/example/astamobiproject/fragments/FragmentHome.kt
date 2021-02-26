@@ -8,15 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.astamobiproject.R
-import com.example.astamobiproject.fragments.adapters.RecyclerViewAdapterHome
-import kotlinx.android.synthetic.main.card_for_home.*
+import com.example.astamobiproject.fragments.adapters.RVAdapterHome
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class FragmentHome : Fragment() {
 
     private  var layoutManager: RecyclerView.LayoutManager? = null
-    private  var adapter: RecyclerView.Adapter<RecyclerViewAdapterHome.ViewHolder>? = null
+    private  var adapter: RecyclerView.Adapter<RVAdapterHome.ViewHolder>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +36,7 @@ class FragmentHome : Fragment() {
         layoutManager = LinearLayoutManager(activity)
         recyclerViewHome.layoutManager = layoutManager
 
-        adapter = RecyclerViewAdapterHome()
+        adapter = RVAdapterHome()
         recyclerViewHome.adapter = adapter
 
     }

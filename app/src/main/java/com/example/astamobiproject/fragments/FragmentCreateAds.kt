@@ -3,7 +3,6 @@ package com.example.astamobiproject.fragments
 import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -12,11 +11,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.example.astamobiproject.R
-import com.example.astamobiproject.db.ItemDatabase
-import com.example.astamobiproject.login.Login
+import com.example.astamobiproject.db.BaseItemDB
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_create_ads.*
@@ -30,10 +27,6 @@ class FragmentCreateAds : Fragment() {
     var sPref: SharedPreferences? = null
 
     var imageUri: Uri? = null
-    var imageUri_1: Uri? = null
-    var imageUri_2: Uri? = null
-    var imageUri_3: Uri? = null
-    var imageUri_4: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,16 +72,16 @@ class FragmentCreateAds : Fragment() {
         val itemWidth = editItemWidth.text.toString()
         val itemModel = editItemModel.text.toString()
         val itemMaterial = editItemMaterial.text.toString()
-        val itemDescription = editItemDescription.text.toString()
+//        val itemDescription = editItemDescription.text.toString()
         val itemPrice = editIremPrice.text.toString()
 
 
         if(!TextUtils.isEmpty(uriImage) && !TextUtils.isEmpty(euSize) &&
             !TextUtils.isEmpty(itemLength) && !TextUtils.isEmpty(itemWidth) &&
             !TextUtils.isEmpty(itemModel) && !TextUtils.isEmpty(itemMaterial) &&
-            !TextUtils.isEmpty(itemDescription) && !TextUtils.isEmpty(itemPrice))
+            !TextUtils.isEmpty(itemPrice))
         {
-            val addOrder = ItemDatabase(uriImage, euSize, itemLength, itemWidth, itemModel, itemMaterial, itemDescription, itemPrice)
+            val addOrder = BaseItemDB(uriImage, euSize, itemLength, itemWidth, itemModel, itemMaterial, itemPrice)
             database?.push()?.setValue(addOrder)
             val intent = Intent(activity, HomePage::class.java)
             startActivity(intent)

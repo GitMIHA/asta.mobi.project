@@ -1,6 +1,5 @@
 package com.example.astamobiproject.fragments
 
-import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -8,14 +7,12 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.astamobiproject.R
-import com.example.astamobiproject.fragments.adapters.RecyclerViewAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.fragment_profile.*
 
 public class HomePage: AppCompatActivity() {
 
-    private  var layoutManager: RecyclerView.LayoutManager? = null
-    private  var adapter: RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>? = null
+//    private  var layoutManager: RecyclerView.LayoutManager? = null
+//    private  var adapterMyAds: RecyclerView.Adapter<RVAdapterMyAds.ViewHolder>? = null
 
     var sPref: SharedPreferences? = null
 

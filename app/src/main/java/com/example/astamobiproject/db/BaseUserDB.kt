@@ -2,7 +2,7 @@ package com.example.astamobiproject.db
 
 import com.google.firebase.database.FirebaseDatabase
 
-class NewUserDB() {
+class BaseUserDB() {
 
     var userNumber: String? = null
     var userName: String? = null

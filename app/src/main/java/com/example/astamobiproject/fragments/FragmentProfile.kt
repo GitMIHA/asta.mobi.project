@@ -43,7 +43,8 @@ class FragmentProfile : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        loadUserInfo()
+//        loadUserInfo()
+        firabaseInfo()
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,18 +110,18 @@ class FragmentProfile : Fragment() {
         mAuth = FirebaseAuth.getInstance()
         val currentUser = mAuth.currentUser
         if(currentUser!=null){
-        Glide.with(this).load(currentUser.photoUrl.toString()).into(profile_image)
-        val name = currentUser.displayName
-        val fullName = name!!.split(" ")
-        val nameUser = fullName[0]
-        val lastNameUser = fullName[1]
-        textViewForName.text = nameUser
-        textViewForSecondName.text = lastNameUser
-//        textViewForSecondName.text = surnameUser
-//        textViewForNumber.text = currentUser.phoneNumber
-        textViewForNumber.text = "Number"
-//        textViewForCity.text = currentUser
-        textViewForemailUser.text = currentUser.email
+            Glide.with(this).load(currentUser.photoUrl.toString()).into(profile_image)
+            val name = currentUser.displayName
+            val fullName = name!!.split(" ")
+            val nameUser = fullName[0]
+            val lastNameUser = fullName[1]
+            textViewForName.text = nameUser
+            textViewForSecondName.text = lastNameUser
+    //        textViewForSecondName.text = surnameUser
+    //        textViewForNumber.text = currentUser.phoneNumber
+            textViewForNumber.text = "Number"
+    //        textViewForCity.text = currentUser
+            textViewForemailUser.text = currentUser.email
         }
 
     }
