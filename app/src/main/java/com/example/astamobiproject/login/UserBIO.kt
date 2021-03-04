@@ -3,6 +3,7 @@ package com.example.astamobiproject.login
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
@@ -14,6 +15,7 @@ import com.example.astamobiproject.db.BaseUserDB
 import com.example.astamobiproject.fragments.HomePage
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.user_bio.*
 
 class UserBIO : AppCompatActivity() {
 
@@ -21,7 +23,6 @@ class UserBIO : AppCompatActivity() {
     var database: DatabaseReference? = null
 
     lateinit var userNumber: TextView
-
     lateinit var userName: EditText
     lateinit var userSurname: EditText
     lateinit var userCity: EditText
@@ -39,17 +40,29 @@ class UserBIO : AppCompatActivity() {
         buttonToHome = findViewById(R.id.buttonToHomePage)
         buttonToHome.setOnClickListener { onClickSaveInfo() }
 
-        userNumber = findViewById(R.id.textViewNumberPhone)
-        var numberUSEdio = intent.getStringExtra("numberuser")//достаю номер телефона
-        userNumber.text = numberUSEdio
+        userNumber = findViewById(R.id.textEditNumberPhone)
 
         userName = findViewById(R.id.editTextName)
         userSurname = findViewById(R.id.editTextSurname)
         userCity = findViewById(R.id.editTextCity)
         userEmail = findViewById(R.id.editTextEmailAdr)
 
-        database = FirebaseDatabase.getInstance()
-            .getReference(User_Kay)//група в які будуть сохранятися дані (телефон, ім'я і т.д)
+
+        editTextName.text =Editable.Factory.getInstance()
+            .newEditable(intent.getStringExtra("nameUser"))
+        editTextSurname.text = Editable.Factory.getInstance()
+            .newEditable(intent.getStringExtra("surnameUser"))
+        editTextEmailAdr.text = Editable.Factory.getInstance()
+            .newEditable(intent.getStringExtra("emailUser"))
+        textEditNumberPhone.text = Editable.Factory.getInstance()
+            .newEditable(intent.getStringExtra("numberUser"))
+        if (editTextName.text.isEmpty() || editTextSurname.text.isEmpty()  || editTextEmailAdr.text.isEmpty()  || textEditNumberPhone.text.isEmpty() ) {
+            editTextName.hint = "Ім'я"
+            editTextSurname.hint = "Прізвище"
+            editTextEmailAdr.hint = "E-mail"
+        }
+
+        database = FirebaseDatabase.getInstance().getReference(User_Kay)
 
     }
 
@@ -62,17 +75,16 @@ class UserBIO : AppCompatActivity() {
         val city = userCity.text.toString()
         val email = userEmail.text.toString()
 
-//        val bundle = Bundle()
-//        bundle.putString("userNumber", number)
-
         val newUser = BaseUserDB(number, name, surname, city, email)
 
-        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(surname) && !TextUtils.isEmpty(city) && !TextUtils.isEmpty(email)
+        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(surname) && !TextUtils.isEmpty(city) && !TextUtils.isEmpty(
+                email
+            )
         ) {
 //            if (!email.contains("@", true)) {
             if (email.matches(emailPattern.toRegex())) {
 
-//              database?.push()?.setValue(newUser)
+                database?.push()?.setValue(newUser)
 
                 var intent = Intent(applicationContext, HomePage::class.java)
                 intent.putExtra("numberUser", number)
@@ -91,7 +103,7 @@ class UserBIO : AppCompatActivity() {
 //                editor.apply()
 
                 startActivity(intent)
-                Toast.makeText(this, "Ви заєрестровані успішно: $name", Toast.LENGTH_LONG).show()
+                 Toast.makeText(this, "Ви заєрестровані успішно: $name", Toast.LENGTH_LONG).show()
             } else {
                 Toast.makeText(this, "E-mail не вірний!", Toast.LENGTH_SHORT).show()
 
@@ -100,7 +112,6 @@ class UserBIO : AppCompatActivity() {
             Toast.makeText(this, "Деяке поле пусте", Toast.LENGTH_SHORT).show()
         }
     }
-
 
 
 }

@@ -29,7 +29,6 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 class FragmentProfile : Fragment() {
 
     var imageUri: Uri? = null
-
     var numberUser: String? = null
     var nameUser: String? = null
     var surnameUser: String? = null
@@ -38,7 +37,6 @@ class FragmentProfile : Fragment() {
 
     var sPref: SharedPreferences? = null
 
-    private lateinit var auth: FirebaseAuth
     private lateinit var mAuth: FirebaseAuth
 
     override fun onStart() {
@@ -46,15 +44,11 @@ class FragmentProfile : Fragment() {
 //        loadUserInfo()
         firabaseInfo()
     }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
@@ -63,9 +57,7 @@ class FragmentProfile : Fragment() {
 
         mAuth = FirebaseAuth.getInstance()
 
-
-        val viewModel = ViewModelProvider(this).get(BaseViewModel::class.java)
-
+//        val viewModel = ViewModelProvider(this).get(BaseViewModel::class.java)
 //        viewModel.setName(nameUser!!)
 //        textViewForName.text = viewModel.getName()
 //        viewModel.setSecondName(surnameUser!!)
@@ -73,7 +65,6 @@ class FragmentProfile : Fragment() {
 
         sPref = activity?.getPreferences(Context.MODE_PRIVATE)
         Glide.with(this).load(sPref?.getString("imageProfileUri","")).into(profile_image)
-
 
         val animationDrawable = layoutProfile.background as AnimationDrawable
         animationDrawable.apply {

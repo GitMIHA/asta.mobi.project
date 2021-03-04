@@ -17,9 +17,10 @@ class PhoneVerify : AppCompatActivity() {
 
     lateinit var auth: FirebaseAuth
     lateinit var userNumber: TextView
-
+    lateinit var nameUser: String
+    lateinit var surnameUser: String
+    lateinit var emailUser: String
     var numberuser = ""
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +29,12 @@ class PhoneVerify : AppCompatActivity() {
         val buttverify = findViewById<Button>(R.id.buttonVerifyNumb)
         val otpGiven = findViewById<EditText>(R.id.editTextVerifyNum)
 
-        var numberUSEdio = intent.getStringExtra("numberuser")//достаю номер телефона
-        numberuser = numberUSEdio.toString()//вставляю в змінну  номер телефона -->(передаю в UserBIO)
+        var numberUSEdio = intent.getStringExtra("numberUser")
+        numberuser = numberUSEdio.toString()
+
+        nameUser = intent.getStringExtra("nameUser").toString()
+        surnameUser = intent.getStringExtra("surnameUser").toString()
+        emailUser = intent.getStringExtra("emailUser").toString()
 
         auth = FirebaseAuth.getInstance()
 
@@ -54,7 +59,10 @@ class PhoneVerify : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     var intent = Intent(applicationContext, UserBIO::class.java)
-                    intent.putExtra("numberuser", numberuser) //  Дані яку будемо передавати в інше актівіті
+                    intent.putExtra("nameUser", nameUser)
+                    intent.putExtra("surnameUser", surnameUser)
+                    intent.putExtra("emailUser", emailUser)
+                    intent.putExtra("numberUser", numberuser) //  Дані яку будемо передавати в інше актівіті
                     startActivity(intent)
                     finish()
                 } else {

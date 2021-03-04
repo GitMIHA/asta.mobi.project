@@ -34,16 +34,8 @@ class Login : AppCompatActivity() {
     }
 
     var callbackManager: CallbackManager? = null
-//    private lateinit var auth: FirebaseAuth
-
     private lateinit var mAuth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
-
-    var User_Kay = "USER_DATA"
-    var database: DatabaseReference? = null
-
-    var sPref: SharedPreferences? = null
-
 
     lateinit var personNumber: String
     lateinit var personGivenName: String
@@ -51,13 +43,10 @@ class Login : AppCompatActivity() {
     lateinit var personLocation: String
     lateinit var personEmail: String
 
-    lateinit var str_location: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        database = FirebaseDatabase.getInstance()
-            .getReference(User_Kay)//група в які будуть сохранятися дані (телефон, ім'я і т.д)
 
         mAuth = Firebase.auth
 
@@ -68,7 +57,7 @@ class Login : AppCompatActivity() {
             override fun onSuccess(loginResult: LoginResult?) {
                 Log.d("Success", "facebook:onSuccess:$loginResult")
                 handleFacebookAccessToken(loginResult?.accessToken)
-                Toast.makeText(baseContext, "Все чудово", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(baseContext, "Все чудово", Toast.LENGTH_SHORT).show()
             }
 
             override fun onCancel() {
@@ -105,32 +94,25 @@ class Login : AppCompatActivity() {
         val credential = FacebookAuthProvider.getCredential(accessToken!!.token)
         mAuth.signInWithCredential(credential)
             .addOnSuccessListener { result ->
-                // Увійти в систему успішно, оновіть користувальницький інтерфейс з інформацією про введеного користувача
-                val numberUser = result.user!!.phoneNumber
                 val name = result.user!!.displayName
                 val fullName = name!!.split(" ")
                 val nameUser = fullName[0]
                 val lastNameUser = fullName[1]
-                val cityLocation = "Location"
                 val email = result.user?.email
 
-                val intent = Intent(applicationContext, HomePage::class.java)
+                val intent = Intent(applicationContext, PhoneLogin::class.java)
 
-                intent.putExtra("numberUser", numberUser)
                 intent.putExtra("nameUser", nameUser)
                 intent.putExtra("surnameUser", lastNameUser)
-                intent.putExtra("cityUser", cityLocation)
                 intent.putExtra("emailUser", email)
 
-//                val newUser = NewUserDB(numberUser.toString(), nameUser,lastNameUser, cityLocation,email.toString())
-//                database?.push()?.setValue(newUser)
-                Toast.makeText(this, "Ви упішно зареєстровані: $name", Toast.LENGTH_LONG).show()
+                //Toast.makeText(this, "Ви упішно зареєстровані: $name", Toast.LENGTH_LONG).show()
 
                 startActivity(intent)
 
             }.addOnFailureListener { e ->
-//                Toast.makeText(baseContext, e.message, Toast.LENGTH_LONG).show()
-                val intent = Intent(applicationContext, HomePage::class.java)
+              Toast.makeText(baseContext, e.message, Toast.LENGTH_LONG).show()
+                val intent = Intent(applicationContext, PhoneLogin::class.java)
                 startActivity(intent)
                 Log.e("ERROR_EDMT", e.message!!)
             }
@@ -156,18 +138,14 @@ class Login : AppCompatActivity() {
 //                  val user = auth!!.currentUser
                     val acct = GoogleSignIn.getLastSignedInAccount(this)
 
-                    personNumber = "NUMBER"
                     personGivenName = acct?.givenName!!
                     personFamilyName = acct.familyName!!
-                    personLocation = "Location"
                     personEmail = acct.email!!
 
-                    val intent = Intent(applicationContext, HomePage::class.java)
+                    val intent = Intent(applicationContext, PhoneLogin::class.java)
 
-                    intent.putExtra("numberUser", personNumber)
                     intent.putExtra("nameUser", personGivenName)
                     intent.putExtra("surnameUser", personFamilyName)
-                    intent.putExtra("cityUser", personLocation)
                     intent.putExtra("emailUser", personEmail)
 
 //                    sPref = getPreferences(Context.MODE_PRIVATE)
@@ -180,13 +158,6 @@ class Login : AppCompatActivity() {
 //                    editor?.apply()
 
                     startActivity(intent)
-                    Toast.makeText(
-                        this,
-                        "Ви упішно зареєстровані: $personGivenName",
-                        Toast.LENGTH_LONG
-                    ).show()
-
-
                 } else {
                     Log.w("TAG", "signInWithCredential:failure", task.exception)
                 }
@@ -194,7 +165,6 @@ class Login : AppCompatActivity() {
                 // ...
             }
     }
-    /////////////////////Кінець що відноситься до google
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -212,7 +182,6 @@ class Login : AppCompatActivity() {
         graphRequest.parameters = parameters
         graphRequest.executeAsync()
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
@@ -220,11 +189,8 @@ class Login : AppCompatActivity() {
                 val account = task.getResult(ApiException::class.java)!!
                 Log.d("TAG", "firebaseAuthWithGoogle:" + account.id)
                 firebaseAuthWithGoogle(account.idToken!!)
-
             } catch (e: ApiException) {
-                // Google Sign In failed, update UI appropriately
                 Log.w("TAG", "Google sign in failed", e)
-                // ...
             }
         }
     }

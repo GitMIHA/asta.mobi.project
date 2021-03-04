@@ -25,22 +25,22 @@ class PhoneLogin : AppCompatActivity() {
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
 
     var numberuser = ""
+    lateinit var nameUser: String
+    lateinit var surnameUser: String
+    lateinit var emailUser: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.phone_login)
 
-        auth = FirebaseAuth.getInstance()
-        val ButtPhoneNumb = findViewById<Button>(R.id.buttonVerifyNumb)
+        nameUser = intent.getStringExtra("nameUser").toString()
+        surnameUser = intent.getStringExtra("surnameUser").toString()
+        emailUser = intent.getStringExtra("emailUser").toString()
 
-        //Перевірте поточного користувача, чи він вже ввійшов для автоматичного входу
-        var currentUser = auth.currentUser
-        if (currentUser != null) {
-            //Незабути поміняти на MainActivity
-            startActivity(Intent(applicationContext, HomePage::class.java))
-            finish()
-        }
-        ButtPhoneNumb.setOnClickListener {
+        auth = FirebaseAuth.getInstance()
+        val buttPhoneNumb = findViewById<Button>(R.id.buttonVerifyNumb)
+
+        buttPhoneNumb.setOnClickListener {
             login()
         }
         callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -61,8 +61,10 @@ class PhoneLogin : AppCompatActivity() {
                 resendToken = token
                 var intent = Intent(applicationContext, PhoneVerify::class.java)
                 intent.putExtra("storedVerificationId", storedVerificationId)
-                intent.putExtra("numberuser", numberuser)//передаю номер телефона
-
+                intent.putExtra("nameUser", nameUser)
+                intent.putExtra("surnameUser", surnameUser)
+                intent.putExtra("emailUser", emailUser)
+                intent.putExtra("numberUser", numberuser)//передаю номер телефона
                 startActivity(intent)
             }
         }
