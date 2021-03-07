@@ -1,5 +1,6 @@
 package com.example.astamobiproject.login
 
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -29,6 +30,12 @@ class UserBIO : AppCompatActivity() {
     lateinit var userEmail: EditText
     lateinit var buttonToHome: Button
 
+    private lateinit var number: String
+    private lateinit var name: String
+    private lateinit var surname: String
+    private lateinit var city: String
+    private lateinit var email: String
+
     lateinit var sPref: SharedPreferences
 
     private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
@@ -48,7 +55,7 @@ class UserBIO : AppCompatActivity() {
         userEmail = findViewById(R.id.editTextEmailAdr)
 
 
-        editTextName.text =Editable.Factory.getInstance()
+        editTextName.text = Editable.Factory.getInstance()
             .newEditable(intent.getStringExtra("nameUser"))
         editTextSurname.text = Editable.Factory.getInstance()
             .newEditable(intent.getStringExtra("surnameUser"))
@@ -56,7 +63,7 @@ class UserBIO : AppCompatActivity() {
             .newEditable(intent.getStringExtra("emailUser"))
         textEditNumberPhone.text = Editable.Factory.getInstance()
             .newEditable(intent.getStringExtra("numberUser"))
-        if (editTextName.text.isEmpty() || editTextSurname.text.isEmpty()  || editTextEmailAdr.text.isEmpty()  || textEditNumberPhone.text.isEmpty() ) {
+        if (editTextName.text.isEmpty() || editTextSurname.text.isEmpty() || editTextEmailAdr.text.isEmpty() || textEditNumberPhone.text.isEmpty()) {
             editTextName.hint = "Ім'я"
             editTextSurname.hint = "Прізвище"
             editTextEmailAdr.hint = "E-mail"
@@ -68,12 +75,12 @@ class UserBIO : AppCompatActivity() {
 
     private fun onClickSaveInfo() {
 
-        val number = userNumber.text.toString()
+        number = userNumber.text.toString()
 //      val idUser = database?.key?:""
-        val name = userName.text.toString()
-        val surname = userSurname.text.toString()
-        val city = userCity.text.toString()
-        val email = userEmail.text.toString()
+        name = userName.text.toString()
+        surname = userSurname.text.toString()
+        city = userCity.text.toString()
+        email = userEmail.text.toString()
 
         val newUser = BaseUserDB(number, name, surname, city, email)
 
@@ -81,10 +88,9 @@ class UserBIO : AppCompatActivity() {
                 email
             )
         ) {
-//            if (!email.contains("@", true)) {
             if (email.matches(emailPattern.toRegex())) {
 
-                database?.push()?.setValue(newUser)
+//                database?.push()?.setValue(newUser)
 
                 var intent = Intent(applicationContext, HomePage::class.java)
                 intent.putExtra("numberUser", number)
@@ -93,17 +99,17 @@ class UserBIO : AppCompatActivity() {
                 intent.putExtra("cityUser", city)
                 intent.putExtra("emailUser", email)
 
-//                sPref = getPreferences(Context.MODE_PRIVATE)
-//                val editor = sPref.edit()
-//                editor.putString("numberUserF", number)
-//                editor.putString("nameUserF", name)
-//                editor.putString("surnameUserF", surname)
-//                editor.putString("cityUserF", city)
-//                editor.putString("emailUserF", email)
-//                editor.apply()
+                sPref = getPreferences(Context.MODE_PRIVATE)
+                val editor = sPref.edit()
+                editor.putString("numberUserF", number)
+                editor.putString("nameUserF", name)
+                editor.putString("surnameUserF", surname)
+                editor.putString("cityUserF", city)
+                editor.putString("emailUserF", email)
+                editor.apply()
 
                 startActivity(intent)
-                 Toast.makeText(this, "Ви заєрестровані успішно: $name", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Ви заєрестровані успішно: $name", Toast.LENGTH_LONG).show()
             } else {
                 Toast.makeText(this, "E-mail не вірний!", Toast.LENGTH_SHORT).show()
 

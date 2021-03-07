@@ -38,13 +38,6 @@ class FragmentProfile : Fragment() {
     var sPref: SharedPreferences? = null
 
     private lateinit var mAuth: FirebaseAuth
-
-    override fun onStart() {
-        super.onStart()
-//        loadUserInfo()
-        firabaseInfo()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,6 +50,7 @@ class FragmentProfile : Fragment() {
 
         mAuth = FirebaseAuth.getInstance()
 
+
 //        val viewModel = ViewModelProvider(this).get(BaseViewModel::class.java)
 //        viewModel.setName(nameUser!!)
 //        textViewForName.text = viewModel.getName()
@@ -64,7 +58,10 @@ class FragmentProfile : Fragment() {
 //        textViewForSecondName.text = viewModel.getSecondName()
 
         sPref = activity?.getPreferences(Context.MODE_PRIVATE)
-        Glide.with(this).load(sPref?.getString("imageProfileUri","")).into(profile_image)
+        Glide.with(this).load(sPref?.getString("imageProfileUri", "")).into(profile_image)
+
+        getInfoUse()
+        loadUserInfo()
 
         val animationDrawable = layoutProfile.background as AnimationDrawable
         animationDrawable.apply {
@@ -78,14 +75,14 @@ class FragmentProfile : Fragment() {
             startActivityForResult(gallery, 100)
         }
 
-        buttonExitFromStore.setOnClickListener{
+        buttonExitFromStore.setOnClickListener {
 
             val deletePhoto = R.drawable.ic_launcher_background
             sPref = activity?.getPreferences(Context.MODE_PRIVATE)
             val editor = sPref?.edit()
             editor?.putString("imageProfileUri", deletePhoto.toString())
             editor?.apply()
-            Glide.with(this).load(sPref?.getString("imageProfileUri","")).into(profile_image)
+            Glide.with(this).load(sPref?.getString("imageProfileUri", "")).into(profile_image)
 
             mAuth.signOut()
             LoginManager.getInstance().logOut()
@@ -97,10 +94,10 @@ class FragmentProfile : Fragment() {
 
     }
 
-    fun firabaseInfo(){
+    fun firabaseInfo() {
         mAuth = FirebaseAuth.getInstance()
         val currentUser = mAuth.currentUser
-        if(currentUser!=null){
+        if (currentUser != null) {
             Glide.with(this).load(currentUser.photoUrl.toString()).into(profile_image)
             val name = currentUser.displayName
             val fullName = name!!.split(" ")
@@ -108,48 +105,35 @@ class FragmentProfile : Fragment() {
             val lastNameUser = fullName[1]
             textViewForName.text = nameUser
             textViewForSecondName.text = lastNameUser
-    //        textViewForSecondName.text = surnameUser
-    //        textViewForNumber.text = currentUser.phoneNumber
+//            textViewForNumber.text = currentUser.phoneNumber
             textViewForNumber.text = "Number"
-    //        textViewForCity.text = currentUser
             textViewForemailUser.text = currentUser.email
         }
 
     }
 
-    fun getInfoUse(){
+    private fun getInfoUse() {
         nameUser = activity?.intent?.getStringExtra("nameUser").toString()
-//        textViewForName.text = nameUser
+        textViewForName.text = nameUser
         surnameUser = activity?.intent?.getStringExtra("surnameUser").toString()
-//        textViewForSecondName.text = surnameUser
+        textViewForSecondName.text = surnameUser
         numberUser = activity?.intent?.getStringExtra("numberUser").toString()
-//        textViewForNumber.text = numberUser
+        textViewForNumber.text = numberUser
         cityUser = activity?.intent?.getStringExtra("cityUser").toString()
-//        textViewForCity.text = cityUser
+        textViewForCity.text = cityUser
         emailUser = activity?.intent?.getStringExtra("emailUser").toString()
-//        textViewForemailUser.text = emailUser
-
-//        sPref = activity?.getPreferences(Context.MODE_PRIVATE)
-//        val editor = sPref?.edit()
-//        editor!!.putString("numberUserF", numberUser)
-//        editor.putString("nameUserF", nameUser)
-//        editor.putString("surnameUserF", surnameUser)
-//        editor.putString("cityUserF", cityUser)
-//        editor.putString("emailUserF", emailUser)
-//        editor.apply()
-
+        textViewForemailUser.text = emailUser
     }
 
     private fun loadUserInfo() {
+
         sPref = this.activity?.getPreferences(Context.MODE_PRIVATE)
-
 //        Glide.with(this).load(sPref?.getString("imageProfileUri","")).into(profile_image)
-
-        textViewForName.text = sPref?.getString("nameUserF", "Name")
-        textViewForSecondName.text = sPref?.getString("surnameUserF", "Second Name")
-        textViewForNumber.text = sPref?.getString("numberUserF", "Number")
-        textViewForCity.text = sPref?.getString("cityUserF", "City")
-        textViewForemailUser.text = sPref?.getString("emailUserF", "Email User")
+        textViewForName.text = sPref?.getString("nameUserF", "Name").toString()
+        textViewForSecondName.text = sPref?.getString("surnameUserF", "Second Name").toString()
+        textViewForNumber.text = sPref?.getString("numberUserF", "Number").toString()
+        textViewForCity.text = sPref?.getString("cityUserF", "City").toString()
+        textViewForemailUser.text = sPref?.getString("emailUserF", "Email User").toString()
     }
 
     override fun onRequestPermissionsResult(
@@ -184,11 +168,9 @@ class FragmentProfile : Fragment() {
 
             editor?.apply()
 
-            Glide.with(this).load(sPref?.getString("imageProfileUri","")).into(profile_image)
+            Glide.with(this).load(sPref?.getString("imageProfileUri", "")).into(profile_image)
 
-
-//            loadUserInfo()
-
+            loadUserInfo()
 //            profile_image.setImageURI(imageUri)
         }
 

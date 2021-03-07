@@ -37,7 +37,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="50dp"
         android:background="@drawable/roundstyle"
-        android:onClick="TooastMSG"
+        android:onClick="toLoginPg"
         android:text="To Store"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"

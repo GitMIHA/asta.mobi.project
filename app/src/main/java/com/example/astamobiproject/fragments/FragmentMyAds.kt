@@ -49,12 +49,10 @@ class FragmentMyAds : Fragment() {
         adapterMyAds = RVAdapterMyAds(options)
         recyclerView!!.adapter = adapterMyAds
 
-
     }
 
     override fun onStart() {
         super.onStart()
-//        adapterMyAds.startListening()
     }
     override fun onStop() {
         super.onStop()
