@@ -12,6 +12,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
+import kotlinx.android.synthetic.main.phone_login.*
+import kotlinx.android.synthetic.main.phone_verify.*
 
 class PhoneVerify : AppCompatActivity() {
 
@@ -40,6 +42,8 @@ class PhoneVerify : AppCompatActivity() {
 
         val storedVerificationId = intent.getStringExtra("storedVerificationId")
 
+        val loadDialog = LoadingDialog(this)
+
         buttverify.setOnClickListener {
             var otp = otpGiven.text.toString().trim()
             if (otp.isNotEmpty()) {
@@ -47,9 +51,12 @@ class PhoneVerify : AppCompatActivity() {
                     storedVerificationId.toString(), otp
                 )
                 signInWithPhoneAuthCredential(credential)
+                loadDialog.startLoadingDialog()
             } else {
                 Toast.makeText(this, "Код верифікації введено невірно", Toast.LENGTH_LONG).show()
             }
+
+
         }
 
     }

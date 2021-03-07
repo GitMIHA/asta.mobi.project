@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.example.astamobiproject.MainActivity
 import com.example.astamobiproject.R
 import com.example.astamobiproject.fragments.HomePage
@@ -15,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
+import kotlinx.android.synthetic.main.phone_login.*
 import java.util.concurrent.TimeUnit
 
 class PhoneLogin : AppCompatActivity() {
@@ -28,6 +30,7 @@ class PhoneLogin : AppCompatActivity() {
     lateinit var nameUser: String
     lateinit var surnameUser: String
     lateinit var emailUser: String
+    private val loadDialog = LoadingDialog(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,12 +43,12 @@ class PhoneLogin : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         val buttPhoneNumb = findViewById<Button>(R.id.buttonVerifyNumb)
 
+
         buttPhoneNumb.setOnClickListener {
             login()
         }
         callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-                //Незабути поміняти на MainActivity
                 startActivity(Intent(applicationContext, MainActivity::class.java))
                 finish()
             }
@@ -78,6 +81,7 @@ class PhoneLogin : AppCompatActivity() {
             number = "+38$number"
             numberuser = number
             sendVerificationcode(number)
+            loadDialog.startLoadingDialog()
         } else {
             Toast.makeText(this, "Enter mobile number", Toast.LENGTH_SHORT).show()
         }

@@ -128,19 +128,5 @@
     </EditText>
 
 
-<!--    -->
-<!--    <TextView-->
-<!--        android:id="@+id/textView_NumberPhone"-->
-<!--        android:layout_width="300dp"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:hint="Phone"-->
-<!--        android:textColor="#FFFFFF"-->
-<!--        android:textColorHint="#FFFFFF"-->
-<!--        android:textSize="18dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.494"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/editTextEmailAdr" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

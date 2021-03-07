@@ -40,12 +40,14 @@ class UserBIO : AppCompatActivity() {
 
     private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
+    private val loadDialog = LoadingDialog(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.user_bio)
 
         buttonToHome = findViewById(R.id.buttonToHomePage)
-        buttonToHome.setOnClickListener { onClickSaveInfo() }
+        buttonToHome.setOnClickListener {onClickSaveInfo() }
 
         userNumber = findViewById(R.id.textEditNumberPhone)
 
@@ -74,7 +76,6 @@ class UserBIO : AppCompatActivity() {
     }
 
     private fun onClickSaveInfo() {
-
         number = userNumber.text.toString()
 //      val idUser = database?.key?:""
         name = userName.text.toString()
@@ -108,6 +109,7 @@ class UserBIO : AppCompatActivity() {
                 editor.putString("emailUserF", email)
                 editor.apply()
 
+                loadDialog.startLoadingDialog()
                 startActivity(intent)
                 Toast.makeText(this, "Ви заєрестровані успішно: $name", Toast.LENGTH_LONG).show()
             } else {
