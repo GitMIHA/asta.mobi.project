@@ -3,14 +3,13 @@ package com.example.astamobiproject
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.astamobiproject.fragments.HomePage
 import com.example.astamobiproject.login.Login
 import com.google.firebase.auth.FirebaseAuth
 
 
-public class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var mAuth: FirebaseAuth
 

@@ -74,33 +74,33 @@ class FragmentProfile : Fragment() {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             startActivityForResult(gallery, 100)
         }
+        buttonExitFromStore.setOnClickListener{signOut()}
 
-        buttonExitFromStore.setOnClickListener {
+    }
 
-            val deletePhoto = R.drawable.ic_launcher_background
-            val deleteName = ""
-            val deleteSurName = ""
-            val deleteCity = ""
-            val deleteEmail = ""
-            val deleteNumber = ""
-            sPref = activity?.getPreferences(Context.MODE_PRIVATE)
-            val editor = sPref?.edit()
-            editor?.putString("imageProfileUri", deletePhoto.toString())
-            editor?.putString("nameUserF", deleteName)
-            editor?.putString("surnameUserF", deleteSurName)
-            editor?.putString("cityUserF", deleteCity)
-            editor?.putString("emailUserF", deleteEmail)
-            editor?.putString("numberUserF", deleteNumber)
-            editor?.apply()
-            Glide.with(this).load(sPref?.getString("imageProfileUri", "")).into(profile_image)
+    fun signOut(){
 
-            mAuth.signOut()
-            LoginManager.getInstance().logOut()
-            val intent = Intent(activity, Login::class.java)
-            startActivity(intent)
+        val deletePhoto = R.drawable.ic_launcher_background
+//        val deleteName = ""
+//        val deleteSurName = ""
+//        val deleteCity = ""
+//        val deleteEmail = ""
+//        val deleteNumber = ""
+        sPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        val editor = sPref?.edit()
+        editor?.putString("imageProfileUri", deletePhoto.toString())
+//        editor?.putString("nameUserF", deleteName)
+//        editor?.putString("surnameUserF", deleteSurName)
+//        editor?.putString("cityUserF", deleteCity)
+//        editor?.putString("emailUserF", deleteEmail)
+//        editor?.putString("numberUserF", deleteNumber)
+        editor?.apply()
+        Glide.with(this).load(sPref?.getString("imageProfileUri", "")).into(profile_image)
 
-        }
-
+        mAuth.signOut()
+        LoginManager.getInstance().logOut()
+        val intent = Intent(activity, Login::class.java)
+        startActivity(intent)
 
     }
 
