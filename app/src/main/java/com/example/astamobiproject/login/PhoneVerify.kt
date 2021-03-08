@@ -23,6 +23,7 @@ class PhoneVerify : AppCompatActivity() {
     lateinit var surnameUser: String
     lateinit var emailUser: String
     var numberuser = ""
+    val loadDialog = LoadingDialog(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +43,6 @@ class PhoneVerify : AppCompatActivity() {
 
         val storedVerificationId = intent.getStringExtra("storedVerificationId")
 
-        val loadDialog = LoadingDialog(this)
 
         buttverify.setOnClickListener {
             var otp = otpGiven.text.toString().trim()
@@ -51,7 +51,6 @@ class PhoneVerify : AppCompatActivity() {
                     storedVerificationId.toString(), otp
                 )
                 signInWithPhoneAuthCredential(credential)
-                loadDialog.startLoadingDialog()
             } else {
                 Toast.makeText(this, "Код верифікації введено невірно", Toast.LENGTH_LONG).show()
             }
@@ -70,6 +69,7 @@ class PhoneVerify : AppCompatActivity() {
                     intent.putExtra("surnameUser", surnameUser)
                     intent.putExtra("emailUser", emailUser)
                     intent.putExtra("numberUser", numberuser) //  Дані яку будемо передавати в інше актівіті
+                    loadDialog.startLoadingDialog()
                     startActivity(intent)
                     finish()
                 } else {

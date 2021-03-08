@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Зачикаєте"
+        android:text="Зачeкаєте..."
         android:textColor="@color/black"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"

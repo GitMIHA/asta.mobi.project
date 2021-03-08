@@ -1,6 +1,6 @@
 package com.example.astamobiproject.login
 
-import android.content.Context
+import  android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -41,13 +41,14 @@ class UserBIO : AppCompatActivity() {
     private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
     private val loadDialog = LoadingDialog(this)
+    private fun String.toEditable(): Editable =  Editable.Factory.getInstance().newEditable(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.user_bio)
 
         buttonToHome = findViewById(R.id.buttonToHomePage)
-        buttonToHome.setOnClickListener {onClickSaveInfo() }
+        buttonToHome.setOnClickListener { onClickSaveInfo() }
 
         userNumber = findViewById(R.id.textEditNumberPhone)
 
@@ -57,24 +58,23 @@ class UserBIO : AppCompatActivity() {
         userEmail = findViewById(R.id.editTextEmailAdr)
 
 
-        editTextName.text = Editable.Factory.getInstance()
-            .newEditable(intent.getStringExtra("nameUser"))
-        editTextSurname.text = Editable.Factory.getInstance()
-            .newEditable(intent.getStringExtra("surnameUser"))
-        editTextEmailAdr.text = Editable.Factory.getInstance()
-            .newEditable(intent.getStringExtra("emailUser"))
-        textEditNumberPhone.text = Editable.Factory.getInstance()
-            .newEditable(intent.getStringExtra("numberUser"))
-        if (editTextName.text.isEmpty() || editTextSurname.text.isEmpty() || editTextEmailAdr.text.isEmpty() || textEditNumberPhone.text.isEmpty()) {
-            editTextName.hint = "Ім'я"
-            editTextSurname.hint = "Прізвище"
-            editTextEmailAdr.hint = "E-mail"
+        editTextName.text = intent.getStringExtra("nameUser")?.toEditable()
+        editTextSurname.text =intent.getStringExtra("surnameUser")?.toEditable()
+        editTextEmailAdr.text =intent.getStringExtra("emailUser")?.toEditable()
+        textEditNumberPhone.text =intent.getStringExtra("numberUser")?.toEditable()
+        if (editTextName.text != null) {
+            editTextName.text = "".toEditable()
+            editTextSurname.text = "".toEditable()
+            editTextEmailAdr.text = "".toEditable()
+        }else{
+            editTextName.text = "".toEditable()
+            editTextSurname.text = "".toEditable()
+            editTextEmailAdr.text = "".toEditable()
         }
 
         database = FirebaseDatabase.getInstance().getReference(User_Kay)
 
     }
-
     private fun onClickSaveInfo() {
         number = userNumber.text.toString()
 //      val idUser = database?.key?:""
