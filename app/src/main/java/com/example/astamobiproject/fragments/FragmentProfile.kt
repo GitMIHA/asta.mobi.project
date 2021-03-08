@@ -78,9 +78,19 @@ class FragmentProfile : Fragment() {
         buttonExitFromStore.setOnClickListener {
 
             val deletePhoto = R.drawable.ic_launcher_background
+            val deleteName = ""
+            val deleteSurName = ""
+            val deleteCity = ""
+            val deleteEmail = ""
+            val deleteNumber = ""
             sPref = activity?.getPreferences(Context.MODE_PRIVATE)
             val editor = sPref?.edit()
             editor?.putString("imageProfileUri", deletePhoto.toString())
+            editor?.putString("nameUserF", deleteName)
+            editor?.putString("surnameUserF", deleteSurName)
+            editor?.putString("cityUserF", deleteCity)
+            editor?.putString("emailUserF", deleteEmail)
+            editor?.putString("numberUserF", deleteNumber)
             editor?.apply()
             Glide.with(this).load(sPref?.getString("imageProfileUri", "")).into(profile_image)
 

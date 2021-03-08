@@ -62,11 +62,12 @@ class UserBIO : AppCompatActivity() {
         editTextSurname.text =intent.getStringExtra("surnameUser")?.toEditable()
         editTextEmailAdr.text =intent.getStringExtra("emailUser")?.toEditable()
         textEditNumberPhone.text =intent.getStringExtra("numberUser")?.toEditable()
-        if (editTextName.text != null) {
+        if (editTextName.text.isEmpty() || editTextSurname.text.isEmpty() || editTextEmailAdr.text.isEmpty()) {
             editTextName.text = "".toEditable()
             editTextSurname.text = "".toEditable()
             editTextEmailAdr.text = "".toEditable()
-        }else{
+        }
+        if (editTextName.text.toString() == "null") {
             editTextName.text = "".toEditable()
             editTextSurname.text = "".toEditable()
             editTextEmailAdr.text = "".toEditable()
