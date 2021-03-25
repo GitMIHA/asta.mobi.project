@@ -38,6 +38,7 @@ class FragmentProfile : Fragment() {
     var sPref: SharedPreferences? = null
 
     private lateinit var mAuth: FirebaseAuth
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -63,12 +64,12 @@ class FragmentProfile : Fragment() {
         getInfoUse()
         loadUserInfo()
 
-        val animationDrawable = layoutProfile.background as AnimationDrawable
-        animationDrawable.apply {
-            setEnterFadeDuration(1000)
-            setExitFadeDuration(1500)
-            start()
-        }
+//        val animationDrawable = layoutProfile.background as AnimationDrawable
+//        animationDrawable.apply {
+//            setEnterFadeDuration(1000)
+//            setExitFadeDuration(1500)
+//            start()
+//        }
 
         buttonAddPhoto.setOnClickListener {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)

@@ -1,4 +1,4 @@
-package com.example.astamobiproject.fragments
+package com.example.astamobiproject.fragments.viewmodel
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable

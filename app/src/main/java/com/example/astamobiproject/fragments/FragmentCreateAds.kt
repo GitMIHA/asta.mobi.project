@@ -76,21 +76,31 @@ class FragmentCreateAds : Fragment() {
         val itemPrice = editIremPrice.text.toString()
 
 
-        if(!TextUtils.isEmpty(uriImage) && !TextUtils.isEmpty(euSize) &&
+        if (!TextUtils.isEmpty(uriImage) && !TextUtils.isEmpty(euSize) &&
             !TextUtils.isEmpty(itemLength) && !TextUtils.isEmpty(itemWidth) &&
             !TextUtils.isEmpty(itemModel) && !TextUtils.isEmpty(itemMaterial) &&
-            !TextUtils.isEmpty(itemPrice))
-        {
-            val addOrder = BaseItemDB(uriImage, euSize, itemLength, itemWidth, itemModel, itemMaterial, itemPrice)
-            database?.push()?.setValue(addOrder)
-            val intent = Intent(activity, HomePage::class.java)
-            startActivity(intent)
+            !TextUtils.isEmpty(itemPrice)
+        ) {
+
+            if (!TextUtils.isEmpty(euSize)) {
+
+            }
+            val addOrder = BaseItemDB(
+                uriImage,
+                euSize,
+                itemLength,
+                itemWidth,
+                itemModel,
+                itemMaterial,
+                itemPrice
+            )
+//            database?.push()?.setValue(addOrder)
+//            val intent = Intent(activity, HomePage::class.java)
+//            startActivity(intent)
             Toast.makeText(activity, "Успішно збережено", Toast.LENGTH_SHORT).show()
-        }
-        else{
+        } else {
             Toast.makeText(activity, "Деяке поле пусте", Toast.LENGTH_SHORT).show()
         }
-
 
 
     }
