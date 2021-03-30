@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -82,22 +83,11 @@ class FragmentProfile : Fragment() {
     fun signOut(){
 
         val deletePhoto = R.drawable.ic_launcher_background
-//        val deleteName = ""
-//        val deleteSurName = ""
-//        val deleteCity = ""
-//        val deleteEmail = ""
-//        val deleteNumber = ""
         sPref = activity?.getPreferences(Context.MODE_PRIVATE)
         val editor = sPref?.edit()
         editor?.putString("imageProfileUri", deletePhoto.toString())
-//        editor?.putString("nameUserF", deleteName)
-//        editor?.putString("surnameUserF", deleteSurName)
-//        editor?.putString("cityUserF", deleteCity)
-//        editor?.putString("emailUserF", deleteEmail)
-//        editor?.putString("numberUserF", deleteNumber)
         editor?.apply()
         Glide.with(this).load(sPref?.getString("imageProfileUri", "")).into(profile_image)
-
         mAuth.signOut()
         LoginManager.getInstance().logOut()
         val intent = Intent(activity, Login::class.java)
